@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+   <head> 
+     <meta charset="UTF-8"/>
+	 <title>Fence Pricing</title> 
+	 <style  type="text/css">
+	         body {background-color : PowderBlue; 
+	                   font-family : helvetica; text-align : center}
+	         hr      {width: 15%; color: darkorange}
+	         h1     {color : black;}
+	         section {margin-left : auto; margin-right : auto; text-align : center;}
+
+     </style>
+   </head> 
+   <body> 
+      <h1>Fence Princing</h1> 
+      <hr/> 
+      <p><b>	   Fence Pricing Calculator<br /> 
+				   Made by: Yoshua Villar</b></p> 
+          
+		   
+
+	<form>
+	  <input type="button" value="Length" onclick="fence_length = prompt('Please enter the length', '1');"></input>
+      <input type="button" value="Width"  onclick="fence_width = prompt('Please enter the width', '1');"></input>
+      <input type="button" value="Fence type" onclick="fence_type = prompt('Please enter chainlink or wooden', 'Wooden');"></input>
+      <input type="button" value="Gates" onclick="gates = prompt('Please enter the number of gates (1, 2, or 3)', '1');"></input>
+	  <input  type= "button" value="Total" onclick ="fence_function(fence_length,fence_width,fence_type,gates)">
+          </form>
+          <script> //here is the start of the script area
+      
+
+			var gates;
+			var price;
+			var taxRate;
+			var perimeter;
+			var price_point = 0;
+			// declared global in case needed to be used on a different function.
+		
+			function fence_function (fence_length,fence_width,fence_type,gates){
+			     
+				   price = 0;
+				   perimeter =0;
+				  _width = 0;
+				  _length = 0;
+				  _gates = parseInt(gates);
+				  taxRate = 0.09;
+			
+				  var _width 	 = parseFloat(fence_width);
+				  var _length 	 = parseFloat(fence_length);
+				  var _fenceType = fence_type.toLowerCase(); 
+				  
+				  perimeter = 2 * (_width + _length);
+
+				if (_fenceType == "wooden"){
+				
+				   calculateAndShow(_fenceType,perimeter,price,taxRate,_gates);
+				
+				}
+				
+				if (_fenceType == "chainlink"){
+				
+				   calculateAndShow(_fenceType,perimeter,price,taxRate,_gates);
+				}
+				
+				else if (_fenceType != "wooden" && _fenceType != "chainlink"){
+				
+					alert("Incorrect fence type");
+				}
+											
+			}
+			
+			function calculateAndShow(_fenceType,perimeter,price,taxRate,_gates){
+			
+				var price_foot  = parseInt(0);
+				var price_gates = parseInt(0);
+				
+				if (_fenceType == "chainlink"){price_foot = 25}
+				if (_fenceType == "wooden"){price_foot = 35}
+				
+				price    =  price_foot * perimeter;
+					
+					
+				if (_gates > 0 && _gates <= 3){
+					
+					switch (_gates){
+					
+					case 1 : 
+					price_gates = 165;
+					price += price_gates;
+					break;
+					
+					case 2 : 
+					price_gates = 330;
+					price += price_gates;
+					break;
+					
+					case 3 : 
+					price += 495;
+					price += price_gates;
+					break;
+					
+					}
+					
+					
+					taxRate  = taxRate * price;	
+					price   += taxRate;
+				
+			
+					
+					alert( "Fence type: "+ _fenceType + "\n" +
+						   "Perimeter: " + perimeter  + "\n" +
+						   "Total (square ft x  " + price_foot+"): "+(price-taxRate-price_gates)+"\n" +
+						   "Gates: "+ gates + "\n" +
+						   "Gates price:" +price_gates+ "\n"+
+						   "Tax (9%):  " + taxRate   + "\n" +
+						   "Total: " + price + "\n");
+					
+				}
+				else {
+				
+					alert("Error ,Wrong number of gates numbres allowed: \n 1,2,3");
+				
+				}
+				
+					
+
+				
+			}
+	  
+		  </script>
+           
+              </div>
+            </div>
+      </section>
+ 
+</body> 
+</html>
